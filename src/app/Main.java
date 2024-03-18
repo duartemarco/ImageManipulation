@@ -9,9 +9,14 @@ public class Main {
         ManipulaImagem.exibirImagens(
                 imagem,
                 //OpPontuais.bandaRed(imagem),
-                //OpPontuais.bandaGreen(imagem),
+                //.bandaGreen(imagem),
                 //OpPontuais.bandaBlue(imagem),
-                OpPontuais.negativo(imagem));
+                //OpPontuais.negativo(imagem),
+                //OpPontuais.cinzaRed(imagem),
+                //OpPontuais.cinzaBlue(imagem),
+                OpPontuais.cinzaGreen(imagem),
+                OpPontuais.cinzaMedia(imagem)
+        );
 
         ManipulaImagem.salvarImagem(imagem, "jpg", "lena_resultado.jpg");
     }
