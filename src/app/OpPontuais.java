@@ -42,12 +42,31 @@ public class OpPontuais {
         int altura = img.getHeight();
         BufferedImage imagemSaida = new BufferedImage(largura, altura, img.getType());
 
+        for (int h = 0; h < altura; h++) { // percorrendo a matriz
+            for (int w = 0; w < largura; w++) { // h e w são pixeis da imagem
+                int rgb = img.getRGB(w, h); // para cada pixel, pegue o rgb
+                Color cor = new Color(rgb); // e jogue para a classe color
+                int blue = cor.getBlue();
+                Color novaCor = new Color(0, 0, blue);
+                imagemSaida.setRGB(w, h, novaCor.getRGB());
+            }
+        }
+        return imagemSaida;
+    }
+
+    public static BufferedImage negativo(BufferedImage img) {
+        int largura = img.getWidth();
+        int altura = img.getHeight();
+        BufferedImage imagemSaida = new BufferedImage(largura, altura, img.getType());
+
         for (int h = 0; h < altura; h++) {
             for (int w = 0; w < largura; w++) {
                 int rgb = img.getRGB(w, h);
                 Color cor = new Color(rgb);
                 int blue = cor.getBlue();
-                Color novaCor = new Color(0, 0, blue);
+                int red = cor.getRed();
+                int green = cor.getGreen();
+                Color novaCor = new Color(255 - red, 255 - green, 255 - blue);
                 imagemSaida.setRGB(w, h, novaCor.getRGB());
             }
         }

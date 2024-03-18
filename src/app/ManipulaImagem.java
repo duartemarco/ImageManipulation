@@ -9,9 +9,9 @@ import java.io.IOException;
 
 public class ManipulaImagem {
 
-    public static void salvarImagem(BufferedImage imagem) {
+    public static void salvarImagem(BufferedImage imagem, String formato, String path) {
         try {
-            ImageIO.write(imagem, "jpg", new File("lena_resultado.jpg"));
+            ImageIO.write(imagem, formato, new File(path));
         } catch (IOException e) {
             System.out.println("Erro ao salvar a imagem");
             throw new RuntimeException(e);
