@@ -142,4 +142,26 @@ public class OpPontuais {
         }
         return imagemSaida;
     }
+
+    public static BufferedImage binarização(BufferedImage img, int limiar) {
+        int largura = img.getWidth();
+        int altura = img.getHeight();
+        BufferedImage imagemSaida = new BufferedImage(largura, altura, img.getType());
+
+        for (int h = 0; h < altura; h++) {
+            for (int w = 0; w < largura; w++) {
+                int rgb = img.getRGB(w, h);
+                Color cor = new Color(rgb);
+                int valor = ( (cor.getRed() + cor.getBlue() + cor.getGreen()) / 3);
+                if (valor > limiar) {
+                    valor = 0;
+                } else {
+                    valor = 255;
+                }
+                Color novaCor = new Color(valor, valor, valor);
+                imagemSaida.setRGB(w, h, novaCor.getRGB());
+            }
+        }
+        return imagemSaida;
+    }
 }
