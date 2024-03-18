@@ -165,7 +165,7 @@ public class OpPontuais {
         return imagemSaida;
     }
 
-    public static BufferedImage aumentoTonalidade(BufferedImage img, int banda, int aumento) {
+    public static BufferedImage aumentoTonalidade(BufferedImage img, String banda, int aumento) {
         int largura = img.getWidth();
         int altura = img.getHeight();
         BufferedImage imagemSaida = new BufferedImage(largura, altura, img.getType());
@@ -178,12 +178,31 @@ public class OpPontuais {
                 int red = cor.getRed();
                 int green = cor.getGreen();
 
-                if (banda == 1 && (red + aumento < 255)) {
+                // banda red
+                if (banda == "red" && (red + aumento < 255) && (red + aumento > 0)) {
                     red += aumento;
-                } else if (banda == 2 && (green + aumento < 255)) {
+                } else if (red + aumento > 255 && red + aumento > 0){
+                    red = 255;
+                } else if (red + aumento < 0) {
+                    red = 0;
+                }
+
+                //banda green
+                if (banda == "green" && (green + aumento < 255) && (green + aumento > 0)) {
                     green += aumento;
-                } else if (banda == 3 && (blue + aumento < 255)) {
+                } else if (green + aumento > 255 && green + aumento > 0){
+                    green = 255;
+                } else if (green + aumento < 0) {
+                    green = 0;
+                }
+
+                //banda blue
+                if (banda == "blue" && (blue + aumento < 255) && (blue + aumento > 0)) {
                     blue += aumento;
+                } else if (blue + aumento > 255 && blue + aumento > 0){
+                    blue = 255;
+                } else if (blue + aumento < 0) {
+                    blue = 0;
                 }
 
                 Color novaCor = new Color(red/3, green/3, blue/3);

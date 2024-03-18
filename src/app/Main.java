@@ -16,8 +16,10 @@ public class Main {
                 //OpPontuais.cinzaBlue(imagem),
                 //OpPontuais.cinzaGreen(imagem),
                 //OpPontuais.cinzaMedia(imagem),
-                OpPontuais.binarização(imagem, 80),
-                OpPontuais.aumentoTonalidade(imagem, 1, 150)
+                //OpPontuais.binarização(imagem, 80),
+                OpPontuais.aumentoTonalidade(imagem, "red", 150),
+                OpPontuais.aumentoTonalidade(imagem, "blue", 150),
+                OpPontuais.aumentoTonalidade(imagem, "green", 50)
         );
 
         ManipulaImagem.salvarImagem(imagem, "jpg", "lena_resultado.jpg");
