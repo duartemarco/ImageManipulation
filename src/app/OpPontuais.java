@@ -164,4 +164,32 @@ public class OpPontuais {
         }
         return imagemSaida;
     }
+
+    public static BufferedImage aumentoTonalidade(BufferedImage img, int banda, int aumento) {
+        int largura = img.getWidth();
+        int altura = img.getHeight();
+        BufferedImage imagemSaida = new BufferedImage(largura, altura, img.getType());
+
+        for (int h = 0; h < altura; h++) {
+            for (int w = 0; w < largura; w++) {
+                int rgb = img.getRGB(w, h);
+                Color cor = new Color(rgb);
+                int blue = cor.getBlue();
+                int red = cor.getRed();
+                int green = cor.getGreen();
+
+                if (banda == 1 && (red + aumento < 255)) {
+                    red += aumento;
+                } else if (banda == 2 && (green + aumento < 255)) {
+                    green += aumento;
+                } else if (banda == 3 && (blue + aumento < 255)) {
+                    blue += aumento;
+                }
+
+                Color novaCor = new Color(red/3, green/3, blue/3);
+                imagemSaida.setRGB(w, h, novaCor.getRGB());
+            }
+        }
+        return imagemSaida;
+    }
 }
