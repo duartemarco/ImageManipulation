@@ -184,31 +184,12 @@ public class OpPontuais {
                 int red = cor.getRed();
                 int green = cor.getGreen();
 
-                // banda red
-                if (banda.equalsIgnoreCase("red") && (red + aumento < 255) && (red + aumento > 0)) {
-                    red += aumento;
-                } else if (red + aumento > 255 && red + aumento > 0){
-                    red = 255;
-                } else if (red + aumento < 0) {
-                    red = 0;
-                }
-
-                //banda green
-                if (banda.equalsIgnoreCase("green") && (green + aumento < 255) && (green + aumento > 0)) {
-                    green += aumento;
-                } else if (green + aumento > 255 && green + aumento > 0){
-                    green = 255;
-                } else if (green + aumento < 0) {
-                    green = 0;
-                }
-
-                //banda blue
-                if (banda.equalsIgnoreCase ("blue") && (blue + aumento < 255) && (blue + aumento > 0)) {
-                    blue += aumento;
-                } else if (blue + aumento > 255 && blue + aumento > 0){
-                    blue = 255;
-                } else if (blue + aumento < 0) {
-                    blue = 0;
+                if (banda.equalsIgnoreCase("red")) {
+                    red = tratarLimitesRGB(red, aumento);
+                } else if (banda.equalsIgnoreCase("green")){
+                    green = tratarLimitesRGB(green, aumento);
+                } else if (banda.equalsIgnoreCase("blue")) {
+                    blue = tratarLimitesRGB(blue, aumento);
                 }
 
                 Color novaCor = new Color(red/3, green/3, blue/3);
@@ -217,4 +198,11 @@ public class OpPontuais {
         }
         return imagemSaida;
     }
+    private static int tratarLimitesRGB(int valor, int acrescimo) {
+        valor += acrescimo;
+        if (valor > 255) valor = 255;
+        else if (valor < 0) valor = 0;
+        return valor;
+    }
 }
+
