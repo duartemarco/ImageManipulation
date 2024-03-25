@@ -171,11 +171,36 @@ public class OpPontuais {
             && !banda.equalsIgnoreCase("green")) {
             throw new IllegalArgumentException("Banda inválida");
         }
+        int largura = img.getWidth();
+        int altura = img.getHeight();
+        BufferedImage imagemSaida = new BufferedImage(largura, altura, img.getType());
+        for (int h = 0; h < altura; h++) {
+            for (int w = 0; w < largura; w++) {
+                int rgb = img.getRGB(w, h);
+                Color cor = new Color(rgb);
+                int blue = cor.getBlue();
+                int red = cor.getRed();
+                int green = cor.getGreen();
+                if (banda.equalsIgnoreCase("red")) {
+                    red = tratarLimitesRGB(red, aumento);
+                } else if (banda.equalsIgnoreCase("green")){
+                    green = tratarLimitesRGB(green, aumento);
+                } else if (banda.equalsIgnoreCase("blue")) {
+                    blue = tratarLimitesRGB(blue, aumento);
+                }
+                Color novaCor = new Color(red/3, green/3, blue/3);
+                imagemSaida.setRGB(w, h, novaCor.getRGB());
+            }
+        }
+        return imagemSaida;
+    }
+
+    public static BufferedImage brilhoAdd(BufferedImage img, int aumento) {
+        //calistenia ==> early return
 
         int largura = img.getWidth();
         int altura = img.getHeight();
         BufferedImage imagemSaida = new BufferedImage(largura, altura, img.getType());
-
         for (int h = 0; h < altura; h++) {
             for (int w = 0; w < largura; w++) {
                 int rgb = img.getRGB(w, h);
@@ -184,20 +209,18 @@ public class OpPontuais {
                 int red = cor.getRed();
                 int green = cor.getGreen();
 
-                if (banda.equalsIgnoreCase("red")) {
-                    red = tratarLimitesRGB(red, aumento);
-                } else if (banda.equalsIgnoreCase("green")){
-                    green = tratarLimitesRGB(green, aumento);
-                } else if (banda.equalsIgnoreCase("blue")) {
-                    blue = tratarLimitesRGB(blue, aumento);
-                }
+                red = tratarLimitesRGB(red, aumento);
+                green = tratarLimitesRGB(green, aumento);
+                blue = tratarLimitesRGB(blue, aumento);
 
-                Color novaCor = new Color(red/3, green/3, blue/3);
+                Color novaCor = new Color(red, green, blue);
                 imagemSaida.setRGB(w, h, novaCor.getRGB());
             }
         }
         return imagemSaida;
     }
+
+
     private static int tratarLimitesRGB(int valor, int acrescimo) {
         valor += acrescimo;
         if (valor > 255) valor = 255;
@@ -205,4 +228,3 @@ public class OpPontuais {
         return valor;
     }
 }
-

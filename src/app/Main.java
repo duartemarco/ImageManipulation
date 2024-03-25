@@ -16,10 +16,11 @@ public class Main {
                 //OpPontuais.cinzaBlue(imagem),
                 //OpPontuais.cinzaGreen(imagem),
                 //OpPontuais.cinzaMedia(imagem),
-                OpPontuais.binarização(imagem, 80),
-                OpPontuais.aumentoTonalidade(imagem, "red", 50),
-                OpPontuais.aumentoTonalidade(imagem, "blue", 50),
-                OpPontuais.aumentoTonalidade(imagem, "green", 50)
+                //OpPontuais.binarização(imagem, 80),
+                //OpPontuais.aumentoTonalidade(imagem, "red", 50),
+                //OpPontuais.aumentoTonalidade(imagem, "blue", 50),
+                //OpPontuais.aumentoTonalidade(imagem, "green", 50),
+                OpPontuais.brilhoAdd(imagem,90)
         );
 
         ManipulaImagem.salvarImagem(imagem, "jpg", "lena_resultado.jpg");
