@@ -165,6 +165,13 @@ public class OpPontuais {
     }
 
     public static BufferedImage aumentoTonalidade(BufferedImage img, String banda, int aumento) {
+        //calistenia ==> early return
+        if (!banda.equalsIgnoreCase("red")
+            && !banda.equalsIgnoreCase("blue")
+            && !banda.equalsIgnoreCase("green")) {
+            throw new IllegalArgumentException("Banda inválida");
+        }
+
         int largura = img.getWidth();
         int altura = img.getHeight();
         BufferedImage imagemSaida = new BufferedImage(largura, altura, img.getType());
@@ -178,7 +185,7 @@ public class OpPontuais {
                 int green = cor.getGreen();
 
                 // banda red
-                if (banda == "red" && (red + aumento < 255) && (red + aumento > 0)) {
+                if (banda.equalsIgnoreCase("red") && (red + aumento < 255) && (red + aumento > 0)) {
                     red += aumento;
                 } else if (red + aumento > 255 && red + aumento > 0){
                     red = 255;
@@ -187,7 +194,7 @@ public class OpPontuais {
                 }
 
                 //banda green
-                if (banda == "green" && (green + aumento < 255) && (green + aumento > 0)) {
+                if (banda.equalsIgnoreCase("green") && (green + aumento < 255) && (green + aumento > 0)) {
                     green += aumento;
                 } else if (green + aumento > 255 && green + aumento > 0){
                     green = 255;
@@ -196,7 +203,7 @@ public class OpPontuais {
                 }
 
                 //banda blue
-                if (banda == "blue" && (blue + aumento < 255) && (blue + aumento > 0)) {
+                if (banda.equalsIgnoreCase ("blue") && (blue + aumento < 255) && (blue + aumento > 0)) {
                     blue += aumento;
                 } else if (blue + aumento > 255 && blue + aumento > 0){
                     blue = 255;
