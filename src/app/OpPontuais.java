@@ -218,6 +218,56 @@ public class OpPontuais {
         return imagemSaida;
     }
 
+    public static BufferedImage brilhoAddYIQ(BufferedImage img, float aumento) {
+        //calistenia ==> early return
+
+        int largura = img.getWidth();
+        int altura = img.getHeight();
+        BufferedImage imagemSaida = new BufferedImage(largura, altura, img.getType());
+        for (int h = 0; h < altura; h++) {
+            for (int w = 0; w < largura; w++) {
+                int rgb = img.getRGB(w, h);
+                Color cor = new Color(rgb);
+
+                int blue = cor.getBlue();
+                int red = cor.getRed();
+                int green = cor.getGreen();
+
+                float y = (float) ((0.299 * red) + (0.587 * green) + (0.114 * blue));
+                float i = (float) ((0.596 * red) - (0.274 * green) - (0.322 * blue));
+                float q = (float) ((0.211 * red) - (0.523 * green) + (0.312 * blue));
+
+                y += aumento;
+
+                int novoRed = (int) ((1*y) + (0.956 * i) + (0.621 * q));
+                int novoGreen = (int) ((1*y) - (0.272 * i) - (0.647 * q));
+                int novoBlue = (int) ((1*y) - (1.106 * i) + (1.703 * q));
+
+                if (novoRed > 255) {
+                    novoRed = 255;
+                } else if (novoRed < 0) {
+                    novoRed = 0;
+                }
+
+                if (novoGreen > 255) {
+                    novoGreen = 255;
+                } else if (novoGreen < 0) {
+                    novoGreen = 0;
+                }
+
+                if (novoBlue > 255) {
+                    novoBlue = 255;
+                } else if (novoBlue < 0) {
+                    novoBlue = 0;
+                }
+
+                Color novaCor = new Color(novoRed, novoGreen, novoBlue);
+                imagemSaida.setRGB(w, h, novaCor.getRGB());
+            }
+        }
+        return imagemSaida;
+    }
+
 
     private static int tratarLimitesRGB(int valor, int acrescimo) {
         valor += acrescimo;
