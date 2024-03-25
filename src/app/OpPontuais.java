@@ -195,7 +195,7 @@ public class OpPontuais {
         return imagemSaida;
     }
 
-    public static BufferedImage brilhoAdd(BufferedImage img, int aumento) {
+    public static BufferedImage brilhoAdd(BufferedImage img, float aumento) {
         //calistenia ==> early return
 
         int largura = img.getWidth();
@@ -208,11 +208,9 @@ public class OpPontuais {
                 int blue = cor.getBlue();
                 int red = cor.getRed();
                 int green = cor.getGreen();
-
                 red = tratarLimitesRGB(red, aumento);
                 green = tratarLimitesRGB(green, aumento);
                 blue = tratarLimitesRGB(blue, aumento);
-
                 Color novaCor = new Color(red, green, blue);
                 imagemSaida.setRGB(w, h, novaCor.getRGB());
             }
@@ -222,6 +220,13 @@ public class OpPontuais {
 
 
     private static int tratarLimitesRGB(int valor, int acrescimo) {
+        valor += acrescimo;
+        if (valor > 255) valor = 255;
+        else if (valor < 0) valor = 0;
+        return valor;
+    }
+
+    private static int tratarLimitesRGB(int valor, float acrescimo) {
         valor += acrescimo;
         if (valor > 255) valor = 255;
         else if (valor < 0) valor = 0;
