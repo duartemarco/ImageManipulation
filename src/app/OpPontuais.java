@@ -196,8 +196,6 @@ public class OpPontuais {
     }
 
     public static BufferedImage brilhoAdd(BufferedImage img, float aumento) {
-        //calistenia ==> early return
-
         int largura = img.getWidth();
         int altura = img.getHeight();
         BufferedImage imagemSaida = new BufferedImage(largura, altura, img.getType());
@@ -219,8 +217,6 @@ public class OpPontuais {
     }
 
     public static BufferedImage brilhoAddYIQ(BufferedImage img, float aumento) {
-        //calistenia ==> early return
-
         int largura = img.getWidth();
         int altura = img.getHeight();
         BufferedImage imagemSaida = new BufferedImage(largura, altura, img.getType());
@@ -243,23 +239,9 @@ public class OpPontuais {
                 int novoGreen = (int) ((1*y) - (0.272 * i) - (0.647 * q));
                 int novoBlue = (int) ((1*y) - (1.106 * i) + (1.703 * q));
 
-                if (novoRed > 255) {
-                    novoRed = 255;
-                } else if (novoRed < 0) {
-                    novoRed = 0;
-                }
-
-                if (novoGreen > 255) {
-                    novoGreen = 255;
-                } else if (novoGreen < 0) {
-                    novoGreen = 0;
-                }
-
-                if (novoBlue > 255) {
-                    novoBlue = 255;
-                } else if (novoBlue < 0) {
-                    novoBlue = 0;
-                }
+                novoRed = somenteTrataLimite(novoRed);
+                novoGreen = somenteTrataLimite(novoGreen);
+                novoBlue = somenteTrataLimite(novoBlue);
 
                 Color novaCor = new Color(novoRed, novoGreen, novoBlue);
                 imagemSaida.setRGB(w, h, novaCor.getRGB());
@@ -268,6 +250,11 @@ public class OpPontuais {
         return imagemSaida;
     }
 
+    private static int somenteTrataLimite(int valor) {
+        if (valor > 255) valor = 255;
+        else if (valor < 0) valor = 0;
+        return valor;
+    }
 
     private static int tratarLimitesRGB(int valor, int acrescimo) {
         valor += acrescimo;

@@ -19,7 +19,7 @@ public class Main {
                 //OpPontuais.binarização(imagem, 80),
                 //OpPontuais.aumentoTonalidade(imagem, "red", 50),
                 //OpPontuais.aumentoTonalidade(imagem, "blue", 50),
-                //OpPontuais.aumentoTonalidade(imagem, "green", 50),
+                OpPontuais.aumentoTonalidade(imagem, "green", 50),
                 OpPontuais.brilhoAdd(imagem,90),
                 OpPontuais.brilhoAddYIQ(imagem, 50)
         );
