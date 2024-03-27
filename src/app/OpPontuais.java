@@ -195,7 +195,7 @@ public class OpPontuais {
         return imagemSaida;
     }
 
-    public static BufferedImage brilhoAdd(BufferedImage img, float aumento) {
+    public static BufferedImage brilhoAditivoRGB(BufferedImage img, float aumento) {
         int largura = img.getWidth();
         int altura = img.getHeight();
         BufferedImage imagemSaida = new BufferedImage(largura, altura, img.getType());
