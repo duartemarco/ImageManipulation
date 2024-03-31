@@ -20,7 +20,7 @@ public class Main {
                 //OpPontuais.aumentoTonalidade(imagem, "red", 50),
                 //OpPontuais.aumentoTonalidade(imagem, "blue", 50),
                 //OpPontuais.aumentoTonalidade(imagem, "green", 50),
-                OpPontuais.brilhoAditivoRGB(imagem,90F),
+                OpPontuais.brilhoAditivoRGB(imagem,90),
                 OpPontuais.brilhoAditivoBandaY(imagem, 50),
                 OpPontuais.brilhoMultiplicativoBandaY(imagem, 0.5F)
         );

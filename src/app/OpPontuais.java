@@ -195,7 +195,7 @@ public class OpPontuais {
         return imagemSaida;
     }
 
-    public static BufferedImage brilhoAditivoRGB(BufferedImage img, float aumento) {
+    public static BufferedImage brilhoAditivoRGB(BufferedImage img, int aumento) {
         int largura = img.getWidth();
         int altura = img.getHeight();
         BufferedImage imagemSaida = new BufferedImage(largura, altura, img.getType());
@@ -206,7 +206,28 @@ public class OpPontuais {
                 int blue = cor.getBlue();
                 int red = cor.getRed();
                 int green = cor.getGreen();
-                red = tratarLimitesRGB(red, aumento);
+                red = tratarLimitesRGB(red, aumento); //recebe int aumento, o construtor com int adiciona
+                green = tratarLimitesRGB(green, aumento);
+                blue = tratarLimitesRGB(blue, aumento);
+                Color novaCor = new Color(red, green, blue);
+                imagemSaida.setRGB(w, h, novaCor.getRGB());
+            }
+        }
+        return imagemSaida;
+    }
+
+    public static BufferedImage brilhoMultiplicativoRGB(BufferedImage img, float aumento) {
+        int largura = img.getWidth();
+        int altura = img.getHeight();
+        BufferedImage imagemSaida = new BufferedImage(largura, altura, img.getType());
+        for (int h = 0; h < altura; h++) {
+            for (int w = 0; w < largura; w++) {
+                int rgb = img.getRGB(w, h);
+                Color cor = new Color(rgb);
+                int blue = cor.getBlue();
+                int red = cor.getRed();
+                int green = cor.getGreen();
+                red = tratarLimitesRGB(red, aumento); //recebe float aumento, então por ser pelo construtor com float, multiplica
                 green = tratarLimitesRGB(green, aumento);
                 blue = tratarLimitesRGB(blue, aumento);
                 Color novaCor = new Color(red, green, blue);
@@ -303,7 +324,7 @@ public class OpPontuais {
     }
 
     private static int tratarLimitesRGB(int valor, float acrescimo) {
-        valor += acrescimo;
+        valor *= acrescimo;
         if (valor > 255) valor = 255;
         else if (valor < 0) valor = 0;
         return valor;
