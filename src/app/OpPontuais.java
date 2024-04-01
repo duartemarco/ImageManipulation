@@ -143,7 +143,7 @@ public class OpPontuais {
         return imagemSaida;
     }
 
-    public static BufferedImage binarização(BufferedImage img, int limiar) {
+    public static BufferedImage binarizacao(BufferedImage img, int limiar) {
         int largura = img.getWidth();
         int altura = img.getHeight();
         BufferedImage imagemSaida = new BufferedImage(largura, altura, img.getType());
@@ -188,7 +188,7 @@ public class OpPontuais {
                 } else if (banda.equalsIgnoreCase("blue")) {
                     blue = tratarLimitesRGB(blue, aumento);
                 }
-                Color novaCor = new Color(red/3, green/3, blue/3);
+                Color novaCor = new Color(red, green, blue);
                 imagemSaida.setRGB(w, h, novaCor.getRGB());
             }
         }
@@ -323,10 +323,13 @@ public class OpPontuais {
         return valor;
     }
 
-    private static int tratarLimitesRGB(int valor, float acrescimo) {
-        valor *= acrescimo;
-        if (valor > 255) valor = 255;
-        else if (valor < 0) valor = 0;
-        return valor;
+    private static float tratarLimitesRGB(int valor, float acrescimo) {
+        //valor *= acrescimo;
+        float resultadoRGB = valor * acrescimo;
+        if (resultadoRGB > 255) valor = 255;
+        else if (resultadoRGB < 0) valor = 0;
+        return resultadoRGB;
     }
+
+
 }
