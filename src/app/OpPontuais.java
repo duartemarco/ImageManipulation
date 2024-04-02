@@ -224,9 +224,9 @@ public class OpPontuais {
             for (int w = 0; w < largura; w++) {
                 int rgb = img.getRGB(w, h);
                 Color cor = new Color(rgb);
-                int blue = cor.getBlue();
-                int red = cor.getRed();
-                int green = cor.getGreen();
+                float blue = cor.getBlue();
+                float red = cor.getRed();
+                float green = cor.getGreen();
                 red = tratarLimitesRGB(red, aumento); //recebe float aumento, então por ser pelo construtor com float, multiplica
                 green = tratarLimitesRGB(green, aumento);
                 blue = tratarLimitesRGB(blue, aumento);
@@ -323,7 +323,7 @@ public class OpPontuais {
         return valor;
     }
 
-    private static float tratarLimitesRGB(int valor, float acrescimo) {
+    private static float tratarLimitesRGB(float valor, float acrescimo) {
         //valor *= acrescimo;
         float resultadoRGB = valor * acrescimo;
         if (resultadoRGB > 255) valor = 255;
