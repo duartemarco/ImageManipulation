@@ -23,7 +23,7 @@ public class Main {
 //                OpPontuais.brilhoAditivoRGB(imagem,90),
 //                OpPontuais.brilhoAditivoBandaY(imagem, 50),
 //                OpPontuais.brilhoMultiplicativoBandaY(imagem, 0.5F),
-                OpLocais.media3x3(imagem),
+                //OpLocais.media3x3(imagem),
                 OpLocais.mediana3x3(imagem)
         );
 
