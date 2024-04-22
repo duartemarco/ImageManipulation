@@ -66,6 +66,8 @@ public class OpLocais {
         return imagemSaida;
     }
 
+    // quando for 5x5, verifica se h é 0 ou 1, se w é 0 ou 1, se h é altura -1 ou -2, se w é largura -1 ou -2
+    // sqrt round ?
     private static boolean ePixelDeBorda(int h, int w, int altura, int largura) {
         return h == 0 || w == 0 || h == altura - 1 || w == largura - 1;
     }
