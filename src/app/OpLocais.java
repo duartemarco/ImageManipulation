@@ -45,6 +45,35 @@ public class OpLocais {
     }
 
     public static BufferedImage mediana3x3(BufferedImage imagemEntrada) {
+        int altura = imagemEntrada.getHeight();
+        int largura = imagemEntrada.getWidth();
+        BufferedImage imagemSaida = new BufferedImage(largura, altura, imagemEntrada.getType());
+
+        for (int h = 0; h < altura - 1; h++) {
+            for (int w = 0; w < largura - 1; w++) {
+                if (h == 0 || w == 0 || h == altura - 1 || w == largura - 1) {
+                    int rgb = imagemEntrada.getRGB(w, h);
+                    imagemSaida.setRGB(w, h, rgb);
+                    continue;
+                }
+
+                int[] vizinhanca = new int[9];
+                int count = 0;
+                for (int i = -1; i <= 1; i++) {
+                    for (int j = -1; j <= 1; j++) {
+                        int rgb = imagemEntrada.getRGB(w + j, h + i);
+                        Color cor = new Color(rgb);
+                        vizinhanca[count++] = cor.getRed();
+                    }
+                }
+
+                Arrays.sort(vizinhanca);
+                int mediana = vizinhanca[4];
+                Color novaCor = new Color(mediana, mediana, mediana);
+                imagemSaida.setRGB(w, h, novaCor.getRGB());
+
+            }
+        }
         return imagemSaida;
     }
 }
