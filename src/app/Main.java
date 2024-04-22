@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 public class Main {
     public static void main(String[] args) {
-        BufferedImage imagem = ManipulaImagem.abrirImagem("lena.jpg");
+        BufferedImage imagem = ManipulaImagem.abrirImagem("menino.png");
 
         ManipulaImagem.exibirImagens(
                 imagem,
@@ -20,12 +20,14 @@ public class Main {
                 //OpPontuais.aumentoTonalidade(imagem, "red", 50),
                 //OpPontuais.aumentoTonalidade(imagem, "blue", 50),
                 //OpPontuais.aumentoTonalidade(imagem, "green", 50),
-                OpPontuais.brilhoAditivoRGB(imagem,90),
-                OpPontuais.brilhoAditivoBandaY(imagem, 50),
-                OpPontuais.brilhoMultiplicativoBandaY(imagem, 0.5F)
+//                OpPontuais.brilhoAditivoRGB(imagem,90),
+//                OpPontuais.brilhoAditivoBandaY(imagem, 50),
+//                OpPontuais.brilhoMultiplicativoBandaY(imagem, 0.5F),
+                OpLocais.media3x3(imagem),
+                OpLocais.mediana3x3(imagem)
         );
 
-        ManipulaImagem.salvarImagem(imagem, "jpg", "lena_resultado.jpg");
+        ManipulaImagem.salvarImagem(imagem, "jpg", "menino.png");
     }
 
     //Considerando os seguintes pixels:
