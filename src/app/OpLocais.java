@@ -39,7 +39,7 @@ public class OpLocais {
         return imagemSaida;
     }
 
-// TO-DO: alterar para tamanho variável
+    // TO-DO: alterar para tamanho variável
     public static BufferedImage mediana3x3(BufferedImage imagemEntrada) {
         int altura = imagemEntrada.getHeight();
         int largura = imagemEntrada.getWidth();
@@ -83,6 +83,68 @@ public class OpLocais {
             }
         }
         return vizinhanca;
+    }
+
+    public BufferedImage convolucao(BufferedImage imagemEntrada, int[] kernel) {
+        int tamanhoVizinhanca = (int) Math.sqrt(kernel.length);
+        int qtdElementosVizinhanca = tamanhoVizinhanca * tamanhoVizinhanca;
+        int altura = imagemEntrada.getHeight();
+        int largura = imagemEntrada.getWidth();
+        BufferedImage imagemSaida = new BufferedImage(largura, altura, imagemEntrada.getType());
+
+        for (int h = 0; h < altura - 1; h++) {
+            for (int w = 0; w < largura - 1; w++) {
+                if (ePixelDeBorda(h, w, altura, largura)) {
+                    int rgb = imagemEntrada.getRGB(w, h);
+                    imagemSaida.setRGB(w, h, rgb);
+                    continue;
+                }
+
+                int[] vizinhanca = getVizinhanca(imagemEntrada, w, h);
+
+                int soma = 0;
+                for (int i = 0; i < qtdElementosVizinhanca; i++) {
+                    soma += vizinhanca[i] * kernel[i];
+                }
+                if (soma > 255) soma = 255;
+                else if (soma < 0) soma = 0;
+                Color novaCor = new Color(soma, soma, soma);
+                imagemSaida.setRGB(w, h, novaCor.getRGB());
+
+            }
+        }
+        return imagemSaida;
+    }
+
+    public BufferedImage convolucao(BufferedImage imagemEntrada, double[] kernel) {
+        int tamanhoVizinhanca = (int) Math.sqrt(kernel.length);
+        int qtdElementosVizinhanca = tamanhoVizinhanca * tamanhoVizinhanca;
+        int altura = imagemEntrada.getHeight();
+        int largura = imagemEntrada.getWidth();
+        BufferedImage imagemSaida = new BufferedImage(largura, altura, imagemEntrada.getType());
+
+        for (int h = 0; h < altura - 1; h++) {
+            for (int w = 0; w < largura - 1; w++) {
+                if (ePixelDeBorda(h, w, altura, largura)) {
+                    int rgb = imagemEntrada.getRGB(w, h);
+                    imagemSaida.setRGB(w, h, rgb);
+                    continue;
+                }
+
+                int[] vizinhanca = getVizinhanca(imagemEntrada, w, h);
+
+                double soma = 0;
+                for (int i = 0; i < qtdElementosVizinhanca; i++) {
+                    soma += vizinhanca[i] * kernel[i];
+                }
+                if (soma > 255) soma = 255;
+                else if (soma < 0) soma = 0;
+                Color novaCor = new Color((int) soma, (int) soma, (int) soma);
+                imagemSaida.setRGB(w, h, novaCor.getRGB());
+
+            }
+        }
+        return imagemSaida;
     }
 
 }
