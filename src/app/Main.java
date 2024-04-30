@@ -7,9 +7,9 @@ public class Main {
         BufferedImage imagem = ManipulaImagem.abrirImagem("menino.png");
         double[] kernelGaussiano = {0.0625, 0.125, 0.0625, 0.125, 0.25, 0.125, 0.0625, 0.125, 0.0625};
         int[] linhasHorizontais = {-1, -2, -1, 0, 0, 0, 1, 2, 1};
-        int[] linhasVerticais = {-1, 0, 1, -2, 0, 0, 0, 1, 2, 1};
+        int[] linhasVerticais = {-1, 0, 1, -2, 0, 2, -1, 0, 1};
         int[] linhasOeste = {1, 1, -1, 1, -2, -1, 1, 1, -1};
-        int[] laplaciano = {0, -1, 0, -1, 4, };
+        int[] laplaciano = {0, -1, 0, -1, 4, -1, 0, -1, 0};
 
 
         ManipulaImagem.exibirImagens(imagem,
