@@ -85,7 +85,7 @@ public class OpLocais {
         return vizinhanca;
     }
 
-    public BufferedImage convolucao(BufferedImage imagemEntrada, int[] kernel) {
+    public static BufferedImage convolucao(BufferedImage imagemEntrada, int[] kernel) {
         int tamanhoVizinhanca = (int) Math.sqrt(kernel.length);
         int qtdElementosVizinhanca = tamanhoVizinhanca * tamanhoVizinhanca;
         int altura = imagemEntrada.getHeight();
@@ -116,7 +116,7 @@ public class OpLocais {
         return imagemSaida;
     }
 
-    public BufferedImage convolucao(BufferedImage imagemEntrada, double[] kernel) {
+    public static BufferedImage convolucao(BufferedImage imagemEntrada, double[] kernel) {
         int tamanhoVizinhanca = (int) Math.sqrt(kernel.length);
         int qtdElementosVizinhanca = tamanhoVizinhanca * tamanhoVizinhanca;
         int altura = imagemEntrada.getHeight();
@@ -146,5 +146,21 @@ public class OpLocais {
         }
         return imagemSaida;
     }
+
+    public static int[] obtemHistograma(BufferedImage img) { //pega o valor do Red e joga para todos os campos
+        int largura = img.getWidth();
+        int altura = img.getHeight();
+        int histograma[] = new int[256];
+        for (int h = 0; h < altura; h++) {
+            for (int w = 0; w < largura; w++) {
+                int rgb = img.getRGB(w, h);
+                Color cor = new Color(rgb);
+                int gray = cor.getRed();
+                histograma[gray]++;
+            }
+        }
+        return histograma;
+    }
+
 
 }
